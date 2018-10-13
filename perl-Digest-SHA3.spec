@@ -4,15 +4,16 @@
 #
 Name     : perl-Digest-SHA3
 Version  : 1.04
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Summary  : Perl extension for SHA-3
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Digest-SHA3-bin
-Requires: perl-Digest-SHA3-lib
-Requires: perl-Digest-SHA3-man
+Requires: perl-Digest-SHA3-bin = %{version}-%{release}
+Requires: perl-Digest-SHA3-lib = %{version}-%{release}
+Requires: perl-Digest-SHA3-man = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 Digest::SHA3 version 1.04
@@ -27,10 +28,21 @@ partial-byte data.
 %package bin
 Summary: bin components for the perl-Digest-SHA3 package.
 Group: Binaries
-Requires: perl-Digest-SHA3-man
+Requires: perl-Digest-SHA3-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Digest-SHA3 package.
+
+
+%package dev
+Summary: dev components for the perl-Digest-SHA3 package.
+Group: Development
+Requires: perl-Digest-SHA3-lib = %{version}-%{release}
+Requires: perl-Digest-SHA3-bin = %{version}-%{release}
+Provides: perl-Digest-SHA3-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Digest-SHA3 package.
 
 
 %package lib
@@ -75,9 +87,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -86,17 +98,20 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/Digest/SHA3.pm
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/Digest/SHA3.pm
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/sha3sum
 
+%files dev
+%defattr(-,root,root,-)
+/usr/share/man/man3/Digest::SHA3.3
+
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/sha3sum.1
-/usr/share/man/man3/Digest::SHA3.3
