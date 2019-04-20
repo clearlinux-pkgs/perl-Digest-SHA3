@@ -4,7 +4,7 @@
 #
 Name     : perl-Digest-SHA3
 Version  : 1.04
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Summary  : Perl extension for SHA-3
@@ -28,7 +28,6 @@ partial-byte data.
 %package bin
 Summary: bin components for the perl-Digest-SHA3 package.
 Group: Binaries
-Requires: perl-Digest-SHA3-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Digest-SHA3 package.
@@ -40,6 +39,7 @@ Group: Development
 Requires: perl-Digest-SHA3-lib = %{version}-%{release}
 Requires: perl-Digest-SHA3-bin = %{version}-%{release}
 Provides: perl-Digest-SHA3-devel = %{version}-%{release}
+Requires: perl-Digest-SHA3 = %{version}-%{release}
 
 %description dev
 dev components for the perl-Digest-SHA3 package.
