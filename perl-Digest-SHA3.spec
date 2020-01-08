@@ -4,15 +4,15 @@
 #
 Name     : perl-Digest-SHA3
 Version  : 1.04
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Summary  : Perl extension for SHA-3
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
 Requires: perl-Digest-SHA3-bin = %{version}-%{release}
-Requires: perl-Digest-SHA3-lib = %{version}-%{release}
 Requires: perl-Digest-SHA3-man = %{version}-%{release}
+Requires: perl-Digest-SHA3-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -36,21 +36,12 @@ bin components for the perl-Digest-SHA3 package.
 %package dev
 Summary: dev components for the perl-Digest-SHA3 package.
 Group: Development
-Requires: perl-Digest-SHA3-lib = %{version}-%{release}
 Requires: perl-Digest-SHA3-bin = %{version}-%{release}
 Provides: perl-Digest-SHA3-devel = %{version}-%{release}
 Requires: perl-Digest-SHA3 = %{version}-%{release}
 
 %description dev
 dev components for the perl-Digest-SHA3 package.
-
-
-%package lib
-Summary: lib components for the perl-Digest-SHA3 package.
-Group: Libraries
-
-%description lib
-lib components for the perl-Digest-SHA3 package.
 
 
 %package man
@@ -61,14 +52,24 @@ Group: Default
 man components for the perl-Digest-SHA3 package.
 
 
+%package perl
+Summary: perl components for the perl-Digest-SHA3 package.
+Group: Default
+Requires: perl-Digest-SHA3 = %{version}-%{release}
+
+%description perl
+perl components for the perl-Digest-SHA3 package.
+
+
 %prep
 %setup -q -n Digest-SHA3-1.04
+cd %{_builddir}/Digest-SHA3-1.04
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -78,7 +79,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -98,7 +99,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Digest/SHA3.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -108,10 +108,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/share/man/man3/Digest::SHA3.3
 
-%files lib
-%defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
-
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/sha3sum.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Digest/SHA3.pm
+/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
