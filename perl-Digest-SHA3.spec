@@ -4,7 +4,7 @@
 #
 Name     : perl-Digest-SHA3
 Version  : 1.04
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.04.tar.gz
 Summary  : Perl extension for SHA-3
@@ -114,5 +114,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/Digest/SHA3.pm
-/usr/lib/perl5/vendor_perl/5.30.1/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/Digest/SHA3.pm
+/usr/lib/perl5/vendor_perl/5.30.2/x86_64-linux-thread-multi/auto/Digest/SHA3/SHA3.so
