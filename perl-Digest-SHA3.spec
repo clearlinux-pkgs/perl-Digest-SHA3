@@ -7,7 +7,7 @@
 #
 Name     : perl-Digest-SHA3
 Version  : 1.05
-Release  : 31
+Release  : 32
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.05.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA3-1.05.tar.gz
 Summary  : Perl extension for SHA-3
